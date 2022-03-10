@@ -2,7 +2,9 @@
 # Import Splinter and BeautifulSoup
 from splinter import Browser
 from bs4 import BeautifulSoup as soup
+from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
+driver = webdriver.Chrome(ChromeDriverManager().install())
 import pandas as pd
 
 executable_path = {'executable_path': ChromeDriverManager().install()}
@@ -61,10 +63,10 @@ browser.quit()
 
 # START OF CHALLENGE
 # Import Splinter, BeautifulSoup, and Pandas
-from splinter import Browser
-from bs4 import BeautifulSoup as soup
-import pandas as pd
-from webdriver_manager.chrome import ChromeDriverManager
+#from splinter import Browser
+#from bs4 import BeautifulSoup as soup
+#import pandas as pd
+#from webdriver_manager.chrome import ChromeDriverManager
 
 # Set the executable path and initialize Splinter
 executable_path = {'executable_path': ChromeDriverManager().install()}

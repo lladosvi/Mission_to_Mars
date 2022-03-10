@@ -61,37 +61,21 @@ def mars_news(browser):
 
 
 def featured_image(browser):
-
-    # Visit URL 
-    url= 'https://www.jpl.nasa.gov/spaceimages/?search=&category=Mar'
+    url = 'https://spaceimages-mars.com'
     browser.visit(url)
 
-    # Find and click the full_image button
-    full_image_elem= browser.find_by_id('full_image')[0]
+    full_image_elem = browser.find_by_tag('button')[1]
     full_image_elem.click()
 
-    # Find the more info button and click that 
-    # is_element_present_by_text() method to search for an element that has the provided text
-    browser.is_element_present_by_text('more info', wait_time=1)
+    html = browser.html
+    img_soup = soup(html, 'html.parser')
 
-    # will take our string 'more info' and add link associated with it, then click
-    more_info_elem=browser.links.find_by_partial_text('more info')
-    more_info_elem.click()
-
-    # Parse the resulting html with soup
-    html=browser.html
-    img_soup=soup(html, 'html.parser')
-
-    # Add try/except for error handling
     try:
-        # WE are telling soup to go to figure tag, then within that look for an 'a' tag then within that look for a 'img' tag
-        img_url_rel= img_soup.select_one('figure.lede a img').get("src")
-    
+        img_url_rel = img_soup.find('img', class_='fancybox-image').get('src')
     except AttributeError:
-        return None
-    # Need to get the FULL URL: Only had relative path before
-    img_url= f'https://www.jpl.nasa.gov{img_url_rel}'
+        return None 
 
+    img_url = f'https://spaceimages-mars.com/{img_url_rel}'
     return img_url
 
 def mars_facts():
